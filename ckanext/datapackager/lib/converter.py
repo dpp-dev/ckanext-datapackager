@@ -55,6 +55,7 @@ def dataset_to_datapackage(dataset_dict):
         _parse_maintainer,
         _parse_tags,
         _parse_extras,
+        _parse_shema_fields,
     ]
     dp = {
         'name': dataset_dict['name']
@@ -232,6 +233,21 @@ def _parse_extras(dataset_dict):
     if extras:
         result['extras'] = dict(extras)
 
+    return result
+
+def _parse_shema_fields(dataset_dict):
+    result = {}
+    
+    if dataset_dict.get('owner_org'):
+        result['organization'] = dataset_dict['owner_org']
+    if dataset_dict.get('frequency'):
+        result['frequency'] = dataset_dict['frequency']
+    if dataset_dict.get('language'):
+        result['language'] = dataset_dict['language']
+    if dataset_dict.get('issued'):
+        result['issued'] = dataset_dict['issued']
+    if dataset_dict.get('modified'):
+        result['modified'] = dataset_dict['modified']
     return result
 
 
